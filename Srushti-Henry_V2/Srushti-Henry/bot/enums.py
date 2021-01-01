@@ -13,9 +13,8 @@ class BAR(Enum):
 
 class LINE(Enum):
 
-    SIMPLE_BAR = 'simple_bar'
-    STACKED_BAR = 'stack_bar'
-    GROUP_BAR = 'group_bar'
+    SIMPLE_LINE = 'simple_line'
+    
 
 
 class AREA(Enum):
@@ -27,9 +26,7 @@ class AREA(Enum):
 
 class SCATTER(Enum):
 
-    SIMPLE_BAR = 'simple_bar'
-    STACKED_BAR = 'stack_bar'
-    GROUP_BAR = 'group_bar'
+    SCATTER = 'simple_scatter'
 
 
 class HISTOGRAMS(Enum):
@@ -68,12 +65,19 @@ class CASESSTUDIES(Enum):
 CHART_TYPE = ['bar', 'line', 'area', 'scatter', 'histogram', 
 'maps', 'interactive', 'case', 'other']
 
-PATH = {
-    'log': {i : os.path.join(START_PATH, "log\\", i) for i in CHART_TYPE},
-    'data': os.path.join(START_PATH, "data"),
-    'plot': {i : os.path.join(START_PATH, "altair_plots\\", i) for i in CHART_TYPE}
-}
-
+PATH={}
+if os.name == 'nt':
+    PATH = {
+        'log': {i : os.path.join(START_PATH, "log\\", i) for i in CHART_TYPE},
+        'data': os.path.join(START_PATH, "data"),
+        'plot': {i : os.path.join(START_PATH, "altair_plots\\", i) for i in CHART_TYPE}
+    }
+else:
+    PATH = {
+        'log': {i : os.path.join(START_PATH, "log", i) for i in CHART_TYPE},
+        'data': os.path.join(START_PATH, "data"),
+        'plot': {i : os.path.join(START_PATH, "altair_plots", i) for i in CHART_TYPE}
+    }
 #print( START_PATH  )
 DATA_NAME_LIST = os.listdir(PATH['data'])
 #DATA_NAME_LIST = [ START_PATH + "\\data\\" + i for i in DATA_NAME_LIST ]
